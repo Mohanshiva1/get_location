@@ -37,6 +37,10 @@ dependencies:
   geolocator:
   geocoding:
   location: ^4.3.0
+  google_maps_flutter:
+  flutter_google_places: ^0.3.0
+  firebase_database:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
