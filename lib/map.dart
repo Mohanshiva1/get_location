@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
@@ -45,7 +44,7 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {
       markers.clear();
       markers.add(Marker(
-          markerId: MarkerId('currentLocation'),
+          markerId: const MarkerId('currentLocation'),
           position: LatLng(fbData['f_latitude'], fbData['f_longitude'])));
     });
   }
@@ -101,10 +100,10 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     googleMapController;
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       setState(() {
         CurrentLocation();
-        print('..................................');
+        // print('..................................');
       });
     });
   }
@@ -122,24 +121,22 @@ class _MapScreenState extends State<MapScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              child: Expanded(
-                child: GoogleMap(
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  compassEnabled: true,
-                  mapToolbarEnabled: true,
-                  // liteModeEnabled: true,
+            Expanded(
+              child: GoogleMap(
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
+                compassEnabled: true,
+                mapToolbarEnabled: true,
+                // liteModeEnabled: true,
 
-                  initialCameraPosition: CameraPosition(
-                      target: LatLng(latvalue, longvalue), zoom: 34),
-                  markers: markers,
-                  // zoomControlsEnabled: true,
-                  mapType: MapType.normal,
-                  onMapCreated: (GoogleMapController controller) {
-                    googleMapController = controller;
-                  },
-                ),
+                initialCameraPosition: CameraPosition(
+                    target: LatLng(latvalue, longvalue), zoom: 34),
+                markers: markers,
+                // zoomControlsEnabled: true,
+                mapType: MapType.normal,
+                onMapCreated: (GoogleMapController controller) {
+                  googleMapController = controller;
+                },
               ),
             ),
           ],

@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+// import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_location/map.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,22 +23,22 @@ class _HomePageState extends State<HomePage> {
 
 
   String location = 'Get';
-  String Address = 'Search';
-  String Name = '';
-  String Street = '';
-  String ISO_Country_Code = '';
-  String Country = '';
-  String Postal_code = '';
-  String Administrative_area = '';
-  String Subadministrative_area = '';
-  String Locality = '';
-  String Postal_Code = '';
+  String address = 'Search';
+  String name = '';
+  String street = '';
+  String isoCountryCode = '';
+  String country = '';
+  String postalCode = '';
+  String administrativeArea = '';
+  String subAdministrativeArea = '';
+  String locality = '';
+  String postalCodes = '';
   String lat = '';
   String long = '';
 
 
-  var latval ;
-  var logval ;
+  var latval;
+  var logval;
 
 
   Future<Position> _determinePosition() async {
@@ -66,19 +66,19 @@ class _HomePageState extends State<HomePage> {
     return await Geolocator.getCurrentPosition();
   }
 
-  Future<void> GetAddressFromLatLong(Position position) async {
-    List<Placemark> placemark =
+  Future<void> getAddressFromLatLong(Position position) async {
+    List<Placemark> placeMark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
 
-    // print(placemark);
-    Placemark place = placemark[0];
-    Name = '${place.name}';
-    Street = '${place.street}';
-    Locality = '${place.locality}';
-    Subadministrative_area = '${place.subAdministrativeArea}';
-    Administrative_area = '${place.administrativeArea}';
-    Country = '${place.country}';
-    Postal_Code = '${place.postalCode}';
+    // print(placeMark);
+    Placemark place = placeMark[0];
+    name = '${place.name}';
+    street = '${place.street}';
+    locality = '${place.locality}';
+    subAdministrativeArea = '${place.subAdministrativeArea}';
+    administrativeArea = '${place.administrativeArea}';
+    country = '${place.country}';
+    postalCode = '${place.postalCode}';
     lat = "${position.latitude.toDouble()}" ;
     long = " ${position.longitude.toDouble()}";
     setState(() {
@@ -91,9 +91,9 @@ class _HomePageState extends State<HomePage> {
 
 
 // put value......................
-  final _auth = FirebaseDatabase.instance.reference().child("GPS");
+  final _auth = FirebaseDatabase.instance.ref().child("GPS");
 
-  UpdateValue(){
+  updateValue(){
     _auth.once().then((value) => {
       for (var element in value.snapshot.children){
         // print(element.key),
@@ -131,44 +131,44 @@ class _HomePageState extends State<HomePage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 180),
+              margin: const EdgeInsets.symmetric(horizontal: 180),
               child: Column(
                 children: [
                   ListTile(
-                    title: Text("Lat",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(lat,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Lat",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(lat,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Long ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(long,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Long ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(long,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Name ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Name,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Name ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(name,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Street ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Street,style: TextStyle(color: Colors.blue),),
+                    title:const Text("Street ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(street,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Locality ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Locality,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Locality ",style:  TextStyle(color: Colors.blue),),
+                    trailing: Text(locality,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Subadministrative_area ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Subadministrative_area,style: TextStyle(color: Colors.blue),),
+                    title: const Text("SubAdministrative_area ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(subAdministrativeArea,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Administrative_area ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Administrative_area,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Administrative_area ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(administrativeArea,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Country ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Country,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Country ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(country,style: const TextStyle(color: Colors.blue),),
                   ),
                   ListTile(
-                    title: Text("Postal_code ",style: TextStyle(color: Colors.blue),),
-                    trailing: Text(Postal_Code,style: TextStyle(color: Colors.blue),),
+                    title: const Text("Postal_code ",style: TextStyle(color: Colors.blue),),
+                    trailing: Text(postalCode,style: const TextStyle(color: Colors.blue),),
                   ),
                 ],
               ),
@@ -185,22 +185,22 @@ class _HomePageState extends State<HomePage> {
                     // print(position.latitude);
                     // print(position.longitude);
                     setState(() {
-                      GetAddressFromLatLong(position);
+                      getAddressFromLatLong(position);
                       location =
                       'Lat: ${position.latitude}   long: ${position.longitude}';
                     });
                   },
-                  child: Text("Get Address"),
+                  child: const Text("Get Address"),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 100,
                 ),
                 ElevatedButton(onPressed: (){
                   setState(() {
-                    UpdateValue();
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MapScreen()));
+                    updateValue();
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const MapScreen()));
                   });
-                }, child: Text("Map Location"))
+                }, child: const Text("Map Location"))
               ],
             )
 
